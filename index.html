@@ -1,0 +1,112 @@
+<html>
+<head>
+	<title></title>
+
+</head>
+<body>
+	<script type="text/javascript">
+		var hello = "hello";
+		console.log(hello);
+
+		// var resultBoard = document.getElementById("result");
+		// resultBoard.innerHTML = "hello";
+		// input error ?
+
+		function hexaLetterToDecimal (letter) {
+			var dictionnary = {A:10, B:11, C:12, D:13, E:14, F:15};
+			if (!isNaN(letter)) {
+				return Number(letter);
+			}
+			return dictionnary[letter];
+		}
+
+		function hexExpressionToDecimal (expression) {
+			var total = 0;
+			var size = expression.length;
+			for (var i = 0; i < size; i++) {
+				total += hexaLetterToDecimal(expression[i]) * Math.pow(16, size-1-i);
+			};
+			// console.log(total);
+			//document.getElementById("result").innerText = total;
+			return total;
+		}
+
+		function keyDownHandler () {
+			var text = document.getElementById("entry").value;
+			if (text.length == 2) {
+				var subStr = text[0] + text[1];
+				var v = hexExpressionToDecimal(subStr);
+				document.getElementById("red").innerText = v;
+			}
+			if (text.length == 4) {
+				var subStr = text[2] + text[3];
+				var v = hexExpressionToDecimal(subStr);
+				document.getElementById("green").innerText = v;
+			}
+			if (text.length == 6) {
+				var subStr = text[4] + text[5];
+				var v = hexExpressionToDecimal(subStr);
+				document.getElementById("blue").innerText = v;
+			}
+		}
+
+		// console.log(hexaLetterToDecimal("B"));
+		// console.log(hexaLetterToDecimal("F"));
+		// console.log(hexaLetterToDecimal("8"));
+
+		hexExpressionToDecimal("BABACA");
+	</script>
+	<input id="entry" onkeyup="keyDownHandler()"/>
+	<h1 id="result"></h1>
+	<div class="big-box">
+		<div class="container">
+			<div class="small-box box-red" id="red">
+			100
+			</div>
+			<div class="small-box box-green" id="green">
+			100
+			</div>
+			<div class="small-box box-blue" id="blue">
+			100
+			</div>
+		</div>
+	</div>
+	<style>
+		.big-box {
+			width: 300px;
+			height: 100px;
+			background: #CCC;
+			border-radius: 20px;
+		}
+		.small-box {
+			width: 50px;
+			height: 35px;
+			margin-right: 20px;
+			border: 2px solid #000;
+			float: left;
+			border-radius: 50%;
+			text-align: center;
+			padding-top: 15px;
+		}
+		.container {
+			width: 100%;
+			height: 100%;
+			text-align: center;
+			margin: auto;
+		}
+
+		#red {
+			border-color: #FF0000;
+		}
+
+		#green {
+			border-color: #00FF00;
+		}
+
+		#blue {
+			border-color: #0000FF;
+		}
+
+	</style>
+</body>
+</html>
